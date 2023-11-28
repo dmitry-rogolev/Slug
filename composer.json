@@ -1,0 +1,52 @@
+{
+    "name": "dmitryrogolev/slug",
+    "description": "Functional of slug for the Laravel framework.",
+    "version": "0.0.1",
+    "type": "library",
+    "keywords": [
+        "slug",
+        "laravel",
+        "laravel-slug"
+    ],
+    "homepage": "https://github.com/dmitry-rogolev/Slug",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Rogolev",
+            "email": "work.drogolev@internet.ru",
+            "homepage": "https://dmitryrogolev.ru",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^10.30"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "dmitryrogolev\\Slug\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "dmitryrogolev\\Slug\\Tests\\": "tests/",
+            "dmitryrogolev\\Slug\\Tests\\Database\\": "tests/database/",
+            "dmitryrogolev\\Slug\\Tests\\Database\\Migrations\\": "tests/database/migrations/",
+            "dmitryrogolev\\Slug\\Tests\\Database\\Factories\\": "tests/database/factories/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "dmitryrogolev\\Slug\\Providers\\SlugServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
