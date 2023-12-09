@@ -48,7 +48,7 @@ trait HasSlug
      */
     public function setSlug(string $value): static
     {
-        $this->attributes[$this->getSlugName()] = static::toSlug($value);
+        $this->attributes[$this->getSlugName()] = $this->toSlug($value);
 
         return $this;
     }
@@ -58,7 +58,7 @@ trait HasSlug
      */
     public function setSlugAttribute(string $value): void
     {
-        $this->attributes[$this->getSlugName()] = static::toSlug($value);
+        $this->attributes[$this->getSlugName()] = $this->toSlug($value);
     }
 
     /**
@@ -66,7 +66,9 @@ trait HasSlug
      */
     public static function findBySlug(string $slug): ?Model
     {
-        return static::where(app(static::class)->getSlugName(), static::toSlug($slug))->first();
+        $sluggable = app(static::class);
+
+        return static::where($sluggable->getSlugName(), $sluggable->toSlug($slug))->first();
     }
 
     /**
@@ -78,7 +80,7 @@ trait HasSlug
      * в любом из следующих форматов: en, en_GB или en-GB.
      * @param  array  $dictionary ['@'=>'at'] Словарь.
      */
-    public static function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string
+    public function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string
     {
         return Str::slug($str, $separator, $language, $dictionary);
     }
