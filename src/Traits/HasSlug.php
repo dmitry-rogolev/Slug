@@ -1,9 +1,9 @@
 <?php
 
-namespace dmitryrogolev\Slug\Traits;
+namespace dmitryrogolev\Traits;
 
-use dmitryrogolev\Slug\Facades\Slug;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * Добавляет модели функционал, облегчающий работу с аттрибутом "slug".
@@ -12,26 +12,19 @@ trait HasSlug
 {
     /**
      * Имя аттрибута "slug".
-     *
-     * @var string
      */
-    protected string $slugName;
+    protected string $slugName = 'slug';
 
     /**
      * Возвращает имя аттрибута "slug".
-     *
-     * @return string
      */
     public function getSlugName(): string
     {
-        return isset($this->slugName) ? $this->slugName : Slug::default();
+        return $this->slugName;
     }
 
     /**
      * Изменяет имя аттрибута "slug".
-     *
-     * @param string $name
-     * @return static
      */
     public function setSlugName(string $name): static
     {
@@ -42,8 +35,6 @@ trait HasSlug
 
     /**
      * Возвращает значение аттрибута "slug".
-     *
-     * @return string
      */
     public function getSlug(): string
     {
@@ -53,35 +44,42 @@ trait HasSlug
     /**
      * Изменяет значение аттрибута "slug".
      *
-     * @param string $value
      * @return void
      */
     public function setSlug(string $value): static
     {
-        $this->attributes[$this->getSlugName()] = Slug::from($value);
+        $this->attributes[$this->getSlugName()] = static::toSlug($value);
 
         return $this;
     }
 
     /**
      * При записи аттрибута "slug" приводит его к формату slug'а.
-     *
-     * @param string $value
-     * @return void
      */
     public function setSlugAttribute(string $value): void
     {
-        $this->attributes[$this->getSlugName()] = Slug::from($value);
+        $this->attributes[$this->getSlugName()] = static::toSlug($value);
     }
 
     /**
      * Возвращает модель по его slug'у.
-     * 
-     * @param string $slug
-     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public static function findBySlug(string $slug): Model|null
+    public static function findBySlug(string $slug): ?Model
     {
-        return static::where(app(static::class)->getSlugName(), Slug::from($slug))->first();
+        return static::where(app(static::class)->getSlugName(), static::toSlug($slug))->first();
+    }
+
+    /**
+     * Приводит переданную строку к "slug" значению.
+     *
+     * @param  string  $str Входная строка.
+     * @param  string  $separator ['-'] Строковый разделитель.
+     * @param  string  $language ['en'] Язык или локаль исходной строки. Могут быть указаны для транслитерации в зависимости от языка
+     * в любом из следующих форматов: en, en_GB или en-GB.
+     * @param  array  $dictionary ['@'=>'at'] Словарь.
+     */
+    public static function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string
+    {
+        return Str::slug($str, $separator, $language, $dictionary);
     }
 }

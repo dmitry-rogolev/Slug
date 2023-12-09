@@ -14,10 +14,6 @@
     <env name="SESSION_DRIVER" value="array"/>
     <env name="QUEUE_DRIVER" value="sync"/>
     <env name="DB_FOREIGN_KEYS" value="true" />
-
-    <env name="SLUG_DEFAULT" value="slug" />
-    <env name="SLUG_SEPARATOR" value="-" />
-    <env name="SLUG_LANGUAGE" value="rus" />
   </php>
   <source>
     <include>

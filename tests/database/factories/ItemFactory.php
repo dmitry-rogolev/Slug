@@ -2,7 +2,6 @@
 
 namespace dmitryrogolev\Slug\Tests\Database\Factories;
 
-use dmitryrogolev\Slug\Facades\Slug;
 use dmitryrogolev\Slug\Tests\Models\Item;
 use Orchestra\Testbench\Factories\UserFactory as TestbenchUserFactory;
 
@@ -28,7 +27,7 @@ class ItemFactory extends TestbenchUserFactory
         $title = fake()->unique()->title();
 
         return [
-            'slug' => Slug::from($title),
+            'slug' => app(Item::class)->toSlug($title),
         ];
     }
 }

@@ -22,11 +22,12 @@
         "laravel/framework": "^10.30"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.15"
+        "orchestra/testbench": "^8.15",
+        "laravel/pint": "^1.13"
     },
     "autoload": {
         "psr-4": {
-            "dmitryrogolev\\Slug\\": "src/"
+            "dmitryrogolev\\": "src/"
         }
     },
     "autoload-dev": {
@@ -37,16 +38,10 @@
             "dmitryrogolev\\Slug\\Tests\\Database\\Factories\\": "tests/database/factories/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "dmitryrogolev\\Slug\\Providers\\SlugServiceProvider"
-            ]
-        }
-    },
     "minimum-stability": "stable",
     "prefer-stable": true,
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit", 
+        "pint": "vendor/bin/pint"
     }
 }

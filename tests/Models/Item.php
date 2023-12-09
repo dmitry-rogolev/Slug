@@ -2,10 +2,9 @@
 
 namespace dmitryrogolev\Slug\Tests\Models;
 
-use dmitryrogolev\Slug\Contracts\Sluggable;
-use dmitryrogolev\Slug\Facades\Slug;
+use dmitryrogolev\Contracts\Sluggable;
 use dmitryrogolev\Slug\Tests\Database\Factories\ItemFactory;
-use dmitryrogolev\Slug\Traits\HasSlug;
+use dmitryrogolev\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,13 +25,11 @@ class Item extends Model implements Sluggable
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        array_push($this->fillable, Slug::default());
+        array_push($this->fillable, $this->getSlugName());
     }
 
     /**
      * Возвращает фабрику модели.
-     *
-     * @return \dmitryrogolev\Slug\Tests\Database\Factories\ItemFactory
      */
     public static function newFactory(): ItemFactory
     {
