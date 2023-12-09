@@ -45,10 +45,6 @@ interface Sluggable
      * Приводит переданную строку к "slug" значению.
      *
      * @param  string  $str Входная строка.
-     * @param  string  $separator ['-'] Строковый разделитель.
-     * @param  string  $language ['en'] Язык или локаль исходной строки. Могут быть указаны для транслитерации в зависимости от языка
-     * в любом из следующих форматов: en, en_GB или en-GB.
-     * @param  array  $dictionary ['@'=>'at'] Словарь.
      */
-    public static function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string;
+    public static function toSlug(string $str): string;
 }
