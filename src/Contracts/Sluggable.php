@@ -50,5 +50,5 @@ interface Sluggable
      * в любом из следующих форматов: en, en_GB или en-GB.
      * @param  array  $dictionary ['@'=>'at'] Словарь.
      */
-    public function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string;
+    public static function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string;
 }

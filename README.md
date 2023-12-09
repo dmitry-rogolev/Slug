@@ -60,7 +60,7 @@
 
 Трейт `dmitryrogolev\Traits\HasSlug` по умолчанию использует метод `slug` помощника `Illuminate\Support\Str` при привидении входной строки к slug'у. Вы можете изменить это поведение, переопределив метод `toSlug`:
 
-    public function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string
+    public static function toSlug(string $str, ?string $separator = '-', ?string $language = 'en', ?array $dictionary = ['@' => 'at']): string
     {
         return Str::slug($str, $separator, $language, $dictionary);
     }
